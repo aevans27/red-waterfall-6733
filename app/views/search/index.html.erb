@@ -1,0 +1,23 @@
+<h1>Search Details</h1>
+<h2>Total Members: <%= @results.count %></h2>
+<% @results.each do |result| %>
+  <ul class="park_result">
+  <li>Name: <%= result.name %></li>
+  <li>Photo: <%= image_tag "#{result.photoUrl}" %></li>
+  <li>Allies: <% if result.allies.count > 0 %>
+    <% result.allies.each do |ally| %>
+      <%= ally %>
+    <% end %>
+  <% else %>
+    <%= "none" %>
+  <% end %></li>
+  <li>Enemies: <% if result.enemies.count > 0 %>
+    <% result.enemies.each do |enemy| %>
+      <%= enemy %>
+    <% end %>
+  <% else %>
+    <%= "none" %>
+  <% end %></li>
+  <li>Affiliation: <%= result.affiliation %></li>
+</ul>
+<% end %>
