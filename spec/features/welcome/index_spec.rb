@@ -17,6 +17,15 @@ require 'rails_helper'
 
 RSpec.describe 'Avatar characters viewing page' do 
   it 'get list of all members by nation' do
+    nation_response = File.read('spec/fixtures/fire_nation_fixture.json')
+    stub_request(:get, "https://last-airbender-api.fly.dev/api/v1/characters?affiliation=fire%20nation&perPage=25").
+         with(
+           headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent'=>'Faraday v2.7.12'
+           }).
+         to_return(status: 200, body: nation_response, headers: {})
     visit '/'
     select "Fire Nation", :from => :nation
     click_on "Search For Members"
